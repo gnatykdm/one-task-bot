@@ -1,5 +1,6 @@
 from handlers.messages.languages_start_choice import languages_start_choice_handler
 from handlers.messages.ask_save_time_buttons import ask_save_time_buttons_handler
+from handlers.commands.menu import menu
 from handlers.messages.hadle_time_input_handler import handle_time_input
 from utils.messages import LANGUAGE_BUTTON_TO_ENUM, LANGUAGE_CONFIG
 from handlers.commands.start import handle_start
@@ -40,6 +41,10 @@ async def ask_time_buttons_english(message: Message):
 @bot.message_handler(func=lambda m: m.text in LANGUAGE_CONFIG[LanguageEnum.RUSSIAN]["start_buttons_ask_time"])
 async def ask_time_buttons_russian(message: Message):
     await ask_save_time_buttons_handler.handle_ask_save_time_buttons(message, bot)
+
+@bot.message_handler(commands=["menu"])
+async def handle_menu(message) -> None:
+    await menu(message, bot)
 
 @bot.message_handler(func=lambda m: Validator.validate_time(m.text))
 async def time_input_handler(message: Message):
