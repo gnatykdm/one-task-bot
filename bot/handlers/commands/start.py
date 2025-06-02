@@ -3,25 +3,11 @@ from telebot.async_telebot import AsyncTeleBot as Bot
 from service.user_service import UserService
 from utils.messages import LANGUAGE_CONFIG
 from utils.logs import setup_logger
-from db.session import get_session
+from db.session import get_db_session
 from telebot.types import Message
 from models.models import User, LanguageEnum
 from logging import Logger
-from contextlib import contextmanager
 from typing import Optional
-
-@contextmanager
-def get_db_session():
-    session = next(get_session())
-    try:
-        yield session
-        session.commit()
-    except Exception:
-        session.rollback()
-        raise
-    finally:
-        session.close()
-
 
 class StartCommandHandler:
     def __init__(self, logger: Optional[Logger] = None):

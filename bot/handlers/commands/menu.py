@@ -22,6 +22,6 @@ async def menu(message: Message, bot: Bot) -> None:
         logger.info(f"User {user_id} sent menu")
         await bot.send_message(
             message.chat.id,
-            LANGUAGE_CONFIG[user.language]["menu"],
+            LANGUAGE_CONFIG[user.language]["menu"].format(user_name=user.t_name),
             reply_markup=get_menu_buttons(user.language)
         )

@@ -24,17 +24,7 @@ class RoutineType(enum.Enum):
     MORNING = "MORNING"
     EVENING = "EVENING"
 
-class UserStep(enum.Enum):
-    LOGGING = "LOGGING"
-    REGISTERING = "REGISTERING"
-    SETTING_UP = "SETTING_UP"
-    WORKING = "WORKING"
-    SLEEPING = "SLEEPING"
-    WAKING_UP = "WAKING_UP"
-    NOT_WORKING = "NOT_WORKING"
-
 # --- Models ---
-
 class User(Base):
     __tablename__ = "users"
 
@@ -44,7 +34,6 @@ class User(Base):
     created_at = Column(TIMESTAMP, nullable=False)
     wake_up_time = Column(TIME, nullable=True)
     sleep_time = Column(TIME, nullable=True)
-    step = Column(Enum(UserStep), nullable=True, default=UserStep.LOGGING)
 
     tasks = relationship("Task", back_populates="user", cascade="all, delete")
     notes = relationship("Note", back_populates="user", cascade="all, delete")

@@ -1,6 +1,6 @@
 from utils.messages import LANGUAGE_CONFIG, LANGUAGE_BUTTON_TO_ENUM
 from telebot.async_telebot import AsyncTeleBot as Bot
-from utils.buttons import get_start_ask_time_button
+from utils.buttons import get_start_ask_time_button, get_menu_buttons
 from service.user_service import UserService
 from utils.logs import setup_logger
 from db.session import get_db_session
@@ -33,8 +33,8 @@ class LanguagesStartChoiceHandler:
 
         await bot.send_message(
             message.chat.id,
-            LANGUAGE_CONFIG[language]["ask_time"],
-            reply_markup=get_start_ask_time_button(language)
+            LANGUAGE_CONFIG[language]["saved"],
+            reply_markup=get_menu_buttons(language)
         )
 
 languages_start_choice_handler = LanguagesStartChoiceHandler()

@@ -14,3 +14,6 @@ def get_language_buttons() -> ReplyKeyboardMarkup:
 
 def get_start_ask_time_button(language: LanguageEnum) -> ReplyKeyboardMarkup:
     return get_markup(LANGUAGE_CONFIG[language]["start_buttons_ask_time"])
+
+def get_back_button(language: LanguageEnum) -> ReplyKeyboardMarkup:
+    return get_markup([LANGUAGE_CONFIG[language]["back_button"]])
